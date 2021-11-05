@@ -727,16 +727,25 @@ bool TFT_eSPI::initDMA(bool ctrl_cs)
   if (DMA_Enabled) return false;
 
   esp_err_t ret;
-  spi_bus_config_t buscfg = {
-    .mosi_io_num = TFT_MOSI,
-    .miso_io_num = TFT_MISO,
-    .sclk_io_num = TFT_SCLK,
-    .quadwp_io_num = -1,
-    .quadhd_io_num = -1,
-    .max_transfer_sz = TFT_WIDTH * TFT_HEIGHT * 2 + 8, // TFT screen size
-    .flags = 0,
-    .intr_flags = 0
-  };
+//  spi_bus_config_t buscfg = {
+//    .mosi_io_num = TFT_MOSI,
+//    .miso_io_num = TFT_MISO,
+//    .sclk_io_num = TFT_SCLK,
+//    .quadwp_io_num = -1,
+//    .quadhd_io_num = -1,
+//    .max_transfer_sz = TFT_WIDTH * TFT_HEIGHT * 2 + 8, // TFT screen size
+//    .flags = 0,
+//    .intr_flags = 0
+//  };
+  spi_bus_config_t buscfg;
+    buscfg.mosi_io_num = TFT_MOSI;
+    buscfg.miso_io_num = TFT_MISO;
+    buscfg.sclk_io_num = TFT_SCLK;
+    buscfg.quadwp_io_num = -1;
+    buscfg.quadhd_io_num = -1;
+    buscfg.max_transfer_sz = TFT_WIDTH * TFT_HEIGHT * 2 + 8; // TFT screen size
+    buscfg.flags = 0;
+    buscfg.intr_flags = 0;
 
   int8_t pin = -1;
   if (ctrl_cs) pin = TFT_CS;
